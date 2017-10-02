@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Index</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+
+
+ 
+</style>
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+     $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?$limit=100", function(response) {
+            //console.log(response);
+            $.each(response, function(i,v) {
+               //console.log(v);
+               var myDiv = $("#template").clone();
+               myDiv.removeClass("hidden");
+               var serv_req_num = v.service_request_number;
+               var street = v.street_address;
+               var status = v.status;
+               //check if status contains Completed:
+               if(status.indexOf("Completed") >= 0){
+                   myDiv.find('div.panel-heading').css("background-color", "green");
+               }
+               if(status == "Open"){
+                   myDiv.find('div.panel-heading').css("background-color", "yellow");
+               }
+               myDiv.find('h3.panel-title').html(serv_req_num);
+               myDiv.find('div.panel-body').html(street + "<br>" + status);
+               $("body").append(myDiv);
+            });
+        });
+</script>
+
+
+<h1>311 Graffiti Requests</h1>
+<div class="panel panel-default hidden" id = "template">
+  <div class="panel-heading">
+    <h3 class="panel-title">Panel title</h3>
+  </div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>
+
+
+</body>
+</html>
