@@ -27,9 +27,21 @@
     </style>
   </head>
   <body>
-    <div id="map"></div>
+    <center>
+        <input type="search" id="search_field" placeholder="Enter a Zip Code" required>
+        <select id="status_drop">
+          <option value="Completed">Completed</option>
+          <option value="Open">Open</option>
+        </select>
+        <button id="search_button">Search</button>
+    </center>
+    
     <script>
-
+      $("#search_button").click(
+        function(){
+          initMap()
+        }
+      );
       // This example displays a marker at the center of Australia.
       // When the user clicks the marker, an info window opens.
 /*global google*/
@@ -40,10 +52,11 @@
           center: chicago
         });
         
-/*global $*/        
+        /*global $*/        
         // API call
-       $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?$limit=100", function(response) {
-            //console.log(response);
+       $.get("https://data.cityofchicago.org/resource/cdmx-wzbz.json?zip_code=" + $("#search_field").val() + "&status=" + $("#status_drop").val(), function(response) {
+            //console.log(response.length);
+            $("#result_count").html(response.length + " records returned.");
             $.each(response, function(i,v) {
             
             var status_color = "green"
@@ -77,8 +90,12 @@
         
       }
     </script>
+    <center>
+      <h2 id="result_count"> </h2>
+    </center>
+    <div id="map"></div>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBdKkZ-mPFOAzbNSY_j2T9qC12nosgmbI&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBdKkZ-mPFOAzbNSY_j2T9qC12nosgmbI">
     </script>
   </body>
 </html>
