@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+         <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+        <title>App 11</title>
+    </head>
+    <body>
+        <script>
+        var db = new Dexie("MyDatabase");
+        db.version(1).stores({settings: "name,value"});
+        db.on("populate", function() {
+            db.settings.add({
+                displayName: "Display Name", 
+                shareLocationData: "false",
+                lastAccessed: "now"
+            });
+        });
+        db.open();
+        
+
+        </script>
+    </body>
+</html>

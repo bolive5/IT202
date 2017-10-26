@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+        <script>
+        function drawCircle(x,y){
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(0,0,150,75);
+            
+       // global variables
+        // objects for game, player, harm and bene
+        // canvas and context reference
+        
+        function draw () {
+        	// update character position properties
+        	
+        if (areColliding(player,harm)) {
+        	//  set properties
+        }
+        if (areColliding(player,bene)) {
+        	//  set properties
+        }
+        if (reachedEdge(harm, 'bottom')) {
+        	// set y property
+        }
+        
+        drawCharacter(player);
+        drawCharacter(harm);
+        drawCharacter(bene);
+        }
+        
+        function drawCharacter (character) {
+        switch (character.shape) {
+        		case 'circle' :
+        			drawCircle(character.x, character.y, character.radius, character.color);
+        			break;
+        case 'square' :
+        		// call function to draw square
+        		break;
+        case 'image' :
+        		// call function to draw image
+        		break;
+        	default: 
+        		console.log('character.shape case fell through');	
+        }	
+        }  
+        
+        function drawCircle (x, y, radius, color) {
+        	//
+        }
+        
+        function areColliding(character1,character2) {
+        	// use 2d collision for circles
+        }
+        function reachedEdge(character, edge) {
+        	if (edge == 'bottom' && character.y > canvas.height)
+        		return true;
+        }
+        $(document).ready(function() {
+        	// arrow key keydown event handlers to change player position
+        });
+
+        </script>
+        
+    </body>
+</html>

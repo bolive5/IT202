@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <title> </title>
+    </head>
+    <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+   
+    
+    <script>
+    
+        requestAnimationFrame(draw);
+
+            
+            
+            // global variable
+            var game = {score: 0, lives: 3}
+            var player = {x:250, y:378, color:"blue", shape:"circle"}
+            var harm = {x:250, y:0, color:"red", shape: "circle"}
+            var bene = {x:150, y:0, color:"green", shape: "circle"}
+            // objects for game, player, harm and bene
+            // canvas and context reference
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            var img = new Image;
+            img.src = strDataURI;
+            
+            
+            function draw () {
+            	// update character position properties
+            	//Define some  algorithm to determine the position change for each iteration:
+            	//var xpos = Math.floor(Math.random()*c.width);
+                //var ypos = Math.floor(Math.random()*c.height);
+            	
+                if (areColliding(player,harm)) {
+                	//  set properties
+                }
+                if (areColliding(player,bene)) {
+                	//  set properties
+                }
+                if (reachedEdge(harm, 'bottom')) {
+                    harm.y = canvas.height;
+                	// set y property
+                }
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                drawCharacter(player);
+                player.x = player.x;
+                drawCharacter(harm);
+                harm.y = harm.y + 1;
+                //drawCharacter(bene);
+                drawCharacter(bene);
+                bene.y = bene.y + 1
+                requestAnimationFrame(draw);
+            }
+            
+            
+            function drawCharacter (character) {
+                console.log(character)
+                
+                switch (character.shape) {
+                		case 'circle' :
+                			drawCircle(character.x, character.y, character.radius, character.color);
+                			break;
+                        case 'square' :
+                        		
+                        		break;
+                        case 'image' :
+                            
+                        		
+                        		break;
+                        default:
+                        		console.log('character.shape case fell through');	
+                        }	
+                    }  
+            
+            function drawCircle(x, y, radius, color){
+                    //onsole.log("Hello from draw Circle!!");
+                    ctx.beginPath();
+                    ctx.arc(x,y,20,0,2*Math.PI);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                    ctx.stroke();
+            }
+            
+            function areColliding(character1,character2) {
+            	// use 2d collision for circles
+            }
+            function reachedEdge(character, edge) {
+            	if (edge == 'bottom' && character.y < 0){
+            	    console.log("hello from edge");
+            		return true;}
+            }
+            $(document).ready(function() {
+            	// arrow key keydown event handlers to change player position
+            	var LEFT_KEY = 37;
+                var RIGHT_KEY = 39;
+            });
+    </script>
+    </body>
+</html>

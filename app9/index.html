@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <title> </title>
+    </head>
+    <body>
+    
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <script>
+
+         $("#canvas").on("click", function(evt){
+            console.log(evt);
+            
+
+            setInterval(function() {
+                drawCircle(evt.clientX + Math.random()*300, evt.clientY + Math.random()*300);
+                }, 
+                1000); //draw the circles every 1 second
+            
+            
+            
+         });
+           
+            
+    </script>
+    <script>
+    
+    
+        function drawCircle(x,y){
+            var c = document.getElementById("canvas");
+            var ctx = c.getContext("2d");
+            
+            var radius = Math.floor(Math.random()*50);
+            var xpos = Math.floor(Math.random()*c.width);
+            var ypos = Math.floor(Math.random()*c.height);
+            ctx.beginPath();
+            ctx.arc(x,y,40,0,2*Math.PI);
+            ctx.stroke();
+            
+          
+             
+        
+           
+        function drawText(){
+            var c=document.getElementById("canvas");
+            var ctx=c.getContext("2d");
+            
+            ctx.font="20px Georgia";
+            ctx.fillText("Hello World!",10,50);
+            
+            ctx.font="30px Verdana";
+            // Create gradient
+            var gradient=ctx.createLinearGradient(0,0,c.width,0);
+            gradient.addColorStop("0","magenta");
+            gradient.addColorStop("0.5","blue");
+            gradient.addColorStop("1.0","red");
+            // Fill with gradient
+            ctx.fillStyle=gradient;
+            ctx.fillText("Big smile!",10,90);
+            
+            
+        }
+       
+     var drawRandomFunction = drawCircle(evt.clientX + Math.random()*300, evt.clientY + Math.random()*300);
+            setInterval(drawRandomFunction, 200);
+        
+        }
+        
+    </script>
+    
+    </body>
+</html>
