@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Shrine (MDC-Web Example App)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" sizes="192x192" href="https://material.io/static/images/simple-lp/favicons/components-192x192.png">
+  <link rel="shortcut icon" href="https://material.io/static/images/simple-lp/favicons/components-72x72.png">
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet"
+        href="https://unpkg.com/material-components-web@0.9.1/dist/material-components-web.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body class="mdc-typography">
+  <header id="shrine-header"
+          class="mdc-toolbar mdc-toolbar--fixed mdc-theme--text-primary-on-background">
+    <div class="mdc-toolbar__row">
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+        <a id="shrine-nav-icon" class="material-icons mdc-ripple-surface" href="#"
+           aria-label="Click to show the navigation menu"
+           aria-controls="shrine-nav-menu"
+           data-mdc-auto-init="MDCRipple"
+           data-mdc-ripple-is-unbounded>menu</a>
+        <h1 id="bigproject-logo" class="mdc-toolbar__title"><span>BIG PROJECT</span></h1>
+      </section>
+    </div>
+  </header>
+
+  <aside id="shrine-nav-menu" class="mdc-temporary-drawer" data-mdc-auto-init="MDCTemporaryDrawer">
+    <nav class="mdc-temporary-drawer__drawer">
+      <header class="mdc-temporary-drawer__header"></header>
+      <nav class="mdc-temporary-drawer__content mdc-list">
+        <a class="mdc-list-item" id="home" href="#screen1">Home</a>
+        <a class="mdc-list-item" id= "screen2link" href="#screen2">Clothing</a>
+        <a class="mdc-list-item" href="#screen3">Map</a>
+      </nav>
+    </nav>
+  </aside>
+
+  <main id="shrine-products" class="mdc-toolbar-fixed-adjust">
+    <div>
+      
+      <br><br><br><br><br>
+      <div id = "screen1" class="screen1" hidden>Screen1</div>
+      <div id = "screen2" class="screen2" hidden>Screen2</div>
+      <div id = "screen3" class="screen3" hidden>Screen3</div>
+    </div>
+  </main>
+  <script
+    src="https://unpkg.com/material-components-web@0.9.1/dist/material-components-web.min.js">
+  </script>
+  <script>
+  
+    jQuery(document).ready(function() {
+        $(".mdc-list-item").on("click", function() {
+        $("#screen1").hide();
+        $("#screen2").hide();
+		    $("#screen3").hide();
+			  var target = $(this).attr("href");
+		  	$(target).show();
+
+      });
+    });
+
+    mdc.autoInit()
+    document.getElementById('shrine-nav-icon').addEventListener('click', function(evt) {
+      evt.preventDefault();
+      document.getElementById('shrine-nav-menu').MDCTemporaryDrawer.open = true;
+    });
+    
+     
+  </script>
+</body>
+</html>
