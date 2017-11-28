@@ -1,32 +1,44 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Shrine (MDC-Web Example App)</title>
+  <title>CTA Train Tracker</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" sizes="192x192" href="https://material.io/static/images/simple-lp/favicons/components-192x192.png">
   <link rel="shortcut icon" href="https://material.io/static/images/simple-lp/favicons/components-72x72.png">
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./node_modules/@material/card/mdc-card.scss">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet"
-        href="https://unpkg.com/material-components-web@0.9.1/dist/material-components-web.min.css">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@0.9.1/dist/material-components-web.min.css">
+  <style>
+    .mdc-temporary-drawer__header:before {
+      padding-top: 0;
+    }
+  </style>
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
 </head>
+
 <body class="mdc-typography">
-  <header id="shrine-header"
-          class="mdc-toolbar mdc-toolbar--fixed mdc-theme--text-primary-on-background">
+  <header id="shrine-header" class="mdc-toolbar mdc-toolbar--fixed mdc-theme--text-primary-on-background">
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-        <a id="shrine-nav-icon" class="material-icons mdc-ripple-surface" href="#"
-           aria-label="Click to show the navigation menu"
-           aria-controls="shrine-nav-menu"
-           data-mdc-auto-init="MDCRipple"
-           data-mdc-ripple-is-unbounded>menu</a>
-        <h1 id="bigproject-logo" class="mdc-toolbar__title"><span>BIG PROJECT</span></h1>
+        <a id="shrine-nav-icon" class="material-icons mdc-ripple-surface" href="#" aria-label="Click to show the navigation menu" aria-controls="shrine-nav-menu" data-mdc-auto-init="MDCRipple" style="padding-right: 10px; color: black" data-mdc-ripple-is-unbounded>menu</a>
+        <h1 id="bigproject-logo" class="mdc-toolbar__title"><span>CTA Train Tracker</span></h1>
       </section>
     </div>
   </header>
@@ -36,7 +48,7 @@
       <header class="mdc-temporary-drawer__header"></header>
       <nav class="mdc-temporary-drawer__content mdc-list">
         <a class="mdc-list-item" id="home" href="#screen1">Home</a>
-        <a class="mdc-list-item" id= "screen2link" href="#screen2">Clothing</a>
+        <a class="mdc-list-item" id="screen2link" href="#screen2">Clothing</a>
         <a class="mdc-list-item" href="#screen3">Map</a>
       </nav>
     </nav>
@@ -44,25 +56,37 @@
 
   <main id="shrine-products" class="mdc-toolbar-fixed-adjust">
     <div>
-      
-      <br><br><br><br><br>
-      <div id = "screen1" class="screen1" hidden>Screen1</div>
-      <div id = "screen2" class="screen2" hidden>Screen2</div>
-      <div id = "screen3" class="screen3" hidden>Screen3</div>
+      <div id="screen1" class="screen1" hidden>
+        <dic>Select a Line:</dic>
+        <div style="width:100%">
+          <div><a type="button" onClick="getStops('red', '#c60c30');" class="btn btn-default" style="width:20%;background-color:#c60c30;color:white">RED LINE</a></div>
+          <div><a type="button" onClick="getStops('blue', '#00a1de');" class="btn btn-default" style="width:20%;background-color:#00a1de;color:white;">BLUE LINE</a></div>
+          <div><a type="button" onClick="getStops('pnk', '#e27ea6');" class="btn btn-default" style="width:20%;background-color:#e27ea6;color:white">PINK LINE</a></div>
+          <div><a type="button" onClick="getStops('o', '#f9461c');" class="btn btn-default" style="width:20%;background-color:#f9461c;color:white">ORANGE LINE</a></div>
+          <div><a type="button" onClick="getStops('g', '#009b3a');" class="btn btn-default" style="width:20%;background-color:#009b3a;color:white">GREEN LINE</a></div>
+          <div><a type="button" onClick="getStops('p', '#522398');" class="btn btn-default" style="width:20%;background-color:#522398;color:white">PURPLE LINE</a></div>
+          <div><a type="button" onClick="getStops('brn', '#62361b');" class="btn btn-default" style="width:20%;background-color:#62361b;color:white">BROWN LINE</a></div>
+          <div><a type="button" onClick="getStops('y', '#f9e300');" class="btn btn-default" style="width:20%;background-color:#f9e300;">YELLOW LINE</a></div>
+        </div>
+      </div>
+      <div id="screen2" class="screen2" hidden>
+        <div id="station-nm" style="width:75%"></div>
+      </div>
+      <div id="screen3" class="screen3" hidden>
+        <div id="map"></div>
+      </div>
     </div>
   </main>
-  <script
-    src="https://unpkg.com/material-components-web@0.9.1/dist/material-components-web.min.js">
+  <script src="https://unpkg.com/material-components-web@0.9.1/dist/material-components-web.min.js">
   </script>
   <script>
-  
     jQuery(document).ready(function() {
-        $(".mdc-list-item").on("click", function() {
+      $(".mdc-list-item").on("click", function() {
         $("#screen1").hide();
         $("#screen2").hide();
-		    $("#screen3").hide();
-			  var target = $(this).attr("href");
-		  	$(target).show();
+        $("#screen3").hide();
+        var target = $(this).attr("href");
+        $(target).show();
 
       });
     });
@@ -72,8 +96,158 @@
       evt.preventDefault();
       document.getElementById('shrine-nav-menu').MDCTemporaryDrawer.open = true;
     });
-    
-     
+
+    function show_main() {
+      $("#screen1").show();
+      $("#screen2").hide();
+      $("#screen3").hide();
+    }
+
+    function getStops(l_line, bg_color) {
+      $("#screen1").hide();
+      $("#screen3").hide();
+      $("#screen2").show();
+      $("#screen2").html('');
+      var back_but = "<a type='button' onClick='show_main();' class='btn btn-default;' style='color:gray'>Back</a>";
+      $("#screen2").append(back_but);
+      $.get("https://pass-thru.herokuapp.com/https://data.cityofchicago.org/resource/8mj8-j3c4.json", function(response) {
+        //console.log(response);
+        var station_dict = {};
+        $.each(response, function(i, v) {
+          var direction = v.direction_id;
+          if (v[l_line] == true &&
+            (direction == "N" || direction == "W")
+          ) {
+            var name = v.station_descriptive_name + " - " + v.stop_id;
+            var color = "white";
+            if (l_line == "y") {
+              color = "black";
+            };
+            var stopId = v.stop_id;
+            var mapid = v.map_id
+            var station_nm = v.station_name.trim();
+            var button = "<a type='button' onClick='get_stop_info(" + mapid.trim() + ",\"" + l_line + "\",\"" + bg_color + "\");' class='btn btn-default' style='width:100%;color:" + color + ";background-color:" + bg_color + ";'>" + name + "</a>";
+            //console.log(v.station_descriptive_name + " - " + v.blue);
+            var myA = $("#station-nm").clone();
+            myA.html(button);
+            $("#screen2").append(button);
+          }
+        });
+        //console.log(station_dict);
+
+
+      });
+    };
+
+    function get_stop_info(stop_id1, prev_l, prev_color) {
+      $("#screen2").hide();
+      $("#screen3").show();
+      $("#screen3").html('<div id="map"></div>');
+      var trains = [];
+      var trainz = {};
+      //var back_but = "<a type='button' onClick='show_main();' class='btn btn-default'>Back</a><br>";
+      var back_but = "<a type='button' onClick='getStops(\"" + prev_l + "\",\"" + prev_color + "\");' class='btn btn-default'>Back</a><br>";
+      $("#screen3").append(back_but);
+      $.get("https://pass-thru.herokuapp.com/http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=3afbf187bb934449a50468703ebaab3d&mapid=" + stop_id1 + "&outputType=JSON", function(response) {
+        //console.log(response);
+        $.each(response.ctatt.eta, function(i, v) {
+          var ariv = new Date(v.arrT);
+          var prdt = new Date(v.prdt);
+          var predicted_time = ariv - prdt;
+
+          var myLatLng = { lat: Number(v.lat), lng: Number(v.lon) };
+          trains.push(myLatLng);
+
+
+          var diffMins = Math.round(((predicted_time % 86400000) % 3600000) / 60000); // minutes
+          trainz[i] = { trainloc: myLatLng, dest: v.staNm, eta: diffMins };
+
+          var body = v.staNm + " - " + diffMins + " mins <br>";
+
+          var html = [
+            "<div id='sta-template' class='mdc-card'>",
+            "<section class='mdc-card__primary'>",
+            "<div id='due' style='background-color:green'>Due in " + diffMins + " minutes</div>",
+            "<h1 id='title' class='mdc-card__title mdc-card__title--large'>" + v.staNm + "</h1>",
+            "<h2 id='heading' class='mdc-card__subtitle'>" + v.stpDe + "</h2>",
+            "</section>",
+            "<section class='mdc-card__supporting-text>",
+            v.staNm,
+            "</section>",
+            "</div>"
+          ].join("\n");
+
+          $("#screen3").append(html);
+        });
+        initMap(trains, trainz);
+      });
+    };
+
+    show_main();
   </script>
+
+  <script>
+    function initMap(trains, trainz) {
+
+      //var myLatLng = {lat: 41.810318, lng: -87.63094};
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: { lat: 41.810318, lng: -87.63094 }
+      });
+
+      var infowindow = new google.maps.InfoWindow();
+
+      var marker, i;
+      i = 0;
+      //Loop over the trains:
+      for (var key in trainz) {
+        // check if the property/key is defined in the object itself, not in parent
+        if (trainz.hasOwnProperty(key)) {
+          var myLatLng = trainz[key].trainloc;
+          var name = trainz[key].dest;
+          var eta = trainz[key].eta;
+
+          var contentString = '<div id="content" style="background-color:grey">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
+            '<div id="bodyContent">' +
+            '<p style="background-color:green;color:white;padding:7px;"><b>Arriving in ' + eta + 'mins!</b></p>' +
+            '</div>' +
+            '</div>';
+
+
+          var marker = new google.maps.Marker({
+            position: myLatLng,
+          map: map,
+            title: 'Hello World! ' + key
+          });
+
+
+          google.maps.event.addListener(marker, 'click', (function(marker, contentString) {
+            return function() {
+              infowindow.setContent(contentString);
+              infowindow.open(map, marker);
+            }
+          })(marker, contentString));
+          
+          google.maps.event.addListenerOnce(map, 'idle', function(){
+    $('.gm-style-iw').prev('div').remove();
+}); 
+
+        }
+      }
+
+      var transitLayer = new google.maps.TransitLayer();
+
+
+      transitLayer.setMap(map);
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk8OrEvC66UVM0lHYYuMzQ_xM_8U0WWiI">
+  </script>
+
 </body>
+
 </html>
