@@ -12,6 +12,8 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
+  <script src="./db.js"></script>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" sizes="192x192" href="https://material.io/static/images/simple-lp/favicons/components-192x192.png">
   <link rel="shortcut icon" href="https://material.io/static/images/simple-lp/favicons/components-72x72.png">
@@ -60,7 +62,7 @@
   <main id="shrine-products" class="mdc-toolbar-fixed-adjust">
     <div>
       <div id="screen1" class="screen1" hidden>
-        <dic>Select a Line:</dic>
+        <h2>Select a Line:</h2>
         <div style="width:100%">
           <div><a type="button" onClick="getStops('red', '#c60c30');" class="btn btn-default" style="width:20%;background-color:#c60c30;color:white">RED LINE</a></div>
           <div><a type="button" onClick="getStops('blue', '#00a1de');" class="btn btn-default" style="width:20%;background-color:#00a1de;color:white;">BLUE LINE</a></div>
@@ -70,6 +72,7 @@
           <div><a type="button" onClick="getStops('p', '#522398');" class="btn btn-default" style="width:20%;background-color:#522398;color:white">PURPLE LINE</a></div>
           <div><a type="button" onClick="getStops('brn', '#62361b');" class="btn btn-default" style="width:20%;background-color:#62361b;color:white">BROWN LINE</a></div>
           <div><a type="button" onClick="getStops('y', '#f9e300');" class="btn btn-default" style="width:20%;background-color:#f9e300;">YELLOW LINE</a></div>
+          <h2>Recent Stops</h2>
           <div id="recents"></div>
         </div>
       </div>
@@ -85,16 +88,23 @@
   </script>
   
   <script>
+  
     jQuery(document).ready(function() {
+      show_main();
       $(".mdc-list-item").on("click", function() {
         $("#screen1").hide();
         $("#screen2").hide();
         $("#screen3").hide();
         var target = $(this).attr("href");
+        if(target=="#screen1"){
+          show_main()
+        }
         $(target).show();
 
       });
     });
+    
+    
 
     mdc.autoInit()
     document.getElementById('shrine-nav-icon').addEventListener('click', function(evt) {
@@ -103,7 +113,13 @@
     });
 
     function show_main() {
+      //add();
+
+      $("#recents").html('');
+      readAll();
+     // add();
       $("#screen1").show();
+      
       $("#screen2").hide();
       $("#screen3").hide();
     }
@@ -113,7 +129,7 @@
       $("#screen3").hide();
       $("#screen2").show();
       $("#screen2").html('');
-      var back_but = "<a type='button' onClick='show_main();' class='btn btn-default;' style='color:gray'>Back</a>";
+      var back_but = "<div style='width:100%;'><center><a style='width:50%;' type='button' onClick='show_main();' class='btn btn-default;' style='color:gray'>Back</a></center>";
       $("#screen2").append(back_but);
       $.get("https://pass-thru.herokuapp.com/https://data.cityofchicago.org/resource/8mj8-j3c4.json", function(response) {
         //console.log(response);
@@ -131,10 +147,7 @@
             var stopId = v.stop_id;
             var mapid = v.map_id
             var station_nm = v.station_name.trim();
-            var button = "<a type='button' onClick='get_stop_info(" + mapid.trim() + ",\"" + l_line + "\",\"" + bg_color + "\");' class='btn btn-default' style='width:100%;color:" + color + ";background-color:" + bg_color + ";'>" + name + "</a>";
-            //console.log(v.station_descriptive_name + " - " + v.blue);
-            var myA = $("#station-nm").clone();
-            myA.html(button);
+            var button = "<a type='button' onClick='get_stop_info(" + mapid.trim() + ",\"" + l_line + "\",\"" + bg_color + "\",\"" + name + "\");' class='btn btn-default' style='width:100%;color:" + color + ";background-color:" + bg_color + ";'>" + name + "</a>";
             $("#screen2").append(button);
           }
         });
@@ -144,14 +157,17 @@
       });
     };
 
-    function get_stop_info(stop_id1, prev_l, prev_color) {
+    function get_stop_info(stop_id1, prev_l, prev_color, name) {
+      var button_clicked = "<a type='button' onClick='get_stop_info(" + stop_id1 + ",\"" + prev_l + "\",\"" + prev_color + "\",\"" + name + "\");' class='btn btn-default' style='width:100%;color:black;background-color:" + prev_color + ";'>" + name + "</a>";
+            
+      add(stop_id1,button_clicked);
+      $("#screen1").hide();
       $("#screen2").hide();
       $("#screen3").show();
       $("#screen3").html('<div id="map"></div>');
       var trains = [];
       var trainz = {};
-      //var back_but = "<a type='button' onClick='show_main();' class='btn btn-default'>Back</a><br>";
-      var back_but = "<a type='button' onClick='getStops(\"" + prev_l + "\",\"" + prev_color + "\");' class='btn btn-default'>Back</a><br>";
+      var back_but = "<div style='width:100%;'><center><a style='width:50%;' type='button' onClick='getStops(\"" + prev_l + "\",\"" + prev_color + "\");' class='btn btn-default'>Back</a><center></div><br>";
       $("#screen3").append(back_but);
       $.get("https://pass-thru.herokuapp.com/http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=3afbf187bb934449a50468703ebaab3d&mapid=" + stop_id1 + "&outputType=JSON", function(response) {
         //console.log(response);
@@ -188,7 +204,7 @@
       });
     };
 
-    show_main();
+
   </script>
 
   <script>
