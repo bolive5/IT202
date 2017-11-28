@@ -20,6 +20,9 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://unpkg.com/material-components-web@0.9.1/dist/material-components-web.min.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="./mdc-card/mdc-card.scss">
+  <link rel="stylesheet" href="./material-components-web/material-components-web.scss">
   <style>
     .mdc-temporary-drawer__header:before {
       padding-top: 0;
@@ -47,9 +50,9 @@
     <nav class="mdc-temporary-drawer__drawer">
       <header class="mdc-temporary-drawer__header"></header>
       <nav class="mdc-temporary-drawer__content mdc-list">
-        <a class="mdc-list-item" id="home" href="#screen1">Home</a>
-        <a class="mdc-list-item" id="screen2link" href="#screen2">Clothing</a>
-        <a class="mdc-list-item" href="#screen3">Map</a>
+        <a class="mdc-list-item" id="home" href="#screen1">Select line</a>
+        <a class="mdc-list-item" id="screen2link" href="#screen2">Choose a Station</a>
+        <a class="mdc-list-item" href="#screen3">Eta/Map</a>
       </nav>
     </nav>
   </aside>
@@ -67,6 +70,7 @@
           <div><a type="button" onClick="getStops('p', '#522398');" class="btn btn-default" style="width:20%;background-color:#522398;color:white">PURPLE LINE</a></div>
           <div><a type="button" onClick="getStops('brn', '#62361b');" class="btn btn-default" style="width:20%;background-color:#62361b;color:white">BROWN LINE</a></div>
           <div><a type="button" onClick="getStops('y', '#f9e300');" class="btn btn-default" style="width:20%;background-color:#f9e300;">YELLOW LINE</a></div>
+          <div id="recents"></div>
         </div>
       </div>
       <div id="screen2" class="screen2" hidden>
@@ -79,6 +83,7 @@
   </main>
   <script src="https://unpkg.com/material-components-web@0.9.1/dist/material-components-web.min.js">
   </script>
+  
   <script>
     jQuery(document).ready(function() {
       $(".mdc-list-item").on("click", function() {

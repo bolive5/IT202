@@ -1,9 +1,9 @@
 self.addEventListener('install', function(e) {
 e.waitUntil(
-caches.open('bigproject').then(function(cache) {
+caches.open('final').then(function(cache) {
 return cache.addAll([
 './index.html',
-'./scripts/main.min.js'
+'./main.min.js'
 ]);
 })
 );
