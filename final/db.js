@@ -8,8 +8,7 @@
  if (!window.indexedDB) {
      window.alert("Your browser doesn't support a stable version of IndexedDB.")
  }
- var back_but = "<a type='button' onclick='get_stop_info(40230,&quot;blue&quot;,&quot;#00a1de&quot;);' class='btn btn-default' style='width:100%;color:white;background-color:#00a1de;'>Cumberland (Blue Line) - 30044</a>";
-
+ var back_but = "<a type='button' onclick='get_stop_info(40230,&quot;blue&quot;,&quot;#00a1de&quot;,&quot;Cumberland (Blue Line) - 30044&quot;,&quot;-87.838028,41.984246&quot;);' class='btn btn-default' style='width:100%;color:white;background-color:#00a1de;'>Cumberland (Blue Line) - 30044</a>";
 
  const train_stopData = [
      { id: "40230", button: back_but}
