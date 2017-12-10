@@ -1,0 +1,1 @@
+/home/ubuntu/workspace/project10/ember-quickstart/tmp/funnel-input_base_path-7I9MqUuo.tmp/instance-initializers/initialize-store-service.js

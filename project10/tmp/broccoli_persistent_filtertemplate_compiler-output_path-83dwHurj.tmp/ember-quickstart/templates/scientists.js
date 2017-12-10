@@ -1,0 +1,1 @@
+export default Ember.HTMLBars.template({"id":"UW26atsZ","block":"{\"symbols\":[],\"statements\":[[1,[25,\"people-list\",null,[[\"title\",\"people\"],[\"List of Scientists\",[20,[\"model\"]]]]],false]],\"hasEval\":false}","meta":{"moduleName":"ember-quickstart/templates/scientists.hbs"}});

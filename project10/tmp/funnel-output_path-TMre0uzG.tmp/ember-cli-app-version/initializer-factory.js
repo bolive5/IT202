@@ -1,0 +1,1 @@
+/home/ubuntu/workspace/project10/ember-quickstart/tmp/funnel-input_base_path-RCAf6ZfG.tmp/initializer-factory.js
