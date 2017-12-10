@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110683457-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110683457-1');
+</script>
+
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>CTA Train Tracker</title>
@@ -12,17 +23,11 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
-  <script src="./db.js"></script>
-  
-  <link rel="stylesheet" type="text/css" href="./styles/inline.css">
-
-  <!-- TODO add manifest here -->
-  <link rel="manifest" href="./manifest.json">
-  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" sizes="192x192" href="https://material.io/static/images/simple-lp/favicons/components-192x192.png">
   <link rel="shortcut icon" href="https://material.io/static/images/simple-lp/favicons/components-72x72.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./node_modules/@material/card/mdc-card.scss">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://unpkg.com/material-components-web@0.9.1/dist/material-components-web.min.css">
@@ -66,145 +71,18 @@
   <main id="shrine-products" class="mdc-toolbar-fixed-adjust">
     <div>
       <div id="screen1" class="screen1" hidden>
-        <table>
-        <tr>
-          <th>
-            
-          <div style="width:100%;padding:10px;">
-          <h3>Select a Line</h3>
-          <div><a type="button" onClick="getStops('red', '#c60c30');" class="btn btn-default" style="width:100%;background-color:#c60c30;color:white">RED LINE</a></div>
-          <div><a type="button" onClick="getStops('blue', '#00a1de');" class="btn btn-default" style="width:100%;background-color:#00a1de;color:white;">BLUE LINE</a></div>
-          <div><a type="button" onClick="getStops('pnk', '#e27ea6');" class="btn btn-default" style="width:100%;background-color:#e27ea6;color:white">PINK LINE</a></div>
-          <div><a type="button" onClick="getStops('o', '#f9461c');" class="btn btn-default" style="width:100%;background-color:#f9461c;color:white">ORANGE LINE</a></div>
-          <div><a type="button" onClick="getStops('g', '#009b3a');" class="btn btn-default" style="width:100%;background-color:#009b3a;color:white">GREEN LINE</a></div>
-          <div><a type="button" onClick="getStops('p', '#522398');" class="btn btn-default" style="width:100%;background-color:#522398;color:white">PURPLE LINE</a></div>
-          <div><a type="button" onClick="getStops('brn', '#62361b');" class="btn btn-default" style="width:100%;background-color:#62361b;color:white">BROWN LINE</a></div>
-          <div><a type="button" onClick="getStops('y', '#f9e300');" class="btn btn-default" style="width:100%;background-color:#f9e300;">YELLOW LINE</a></div>
-          </div>
-          
-          </th>
-          <th>
-            <div>
-            <main class="main">
-              <div class="card cardTemplate weather-forecast" hidden>
-                <div class="city-key" hidden></div>
-                <div class="card-last-updated" hidden></div>
-                <div class="location"></div>
-                <div class="date"></div>
-                <div class="description"></div>
-                <div class="current">
-                  <div class="visual">
-                    <div class="icon"></div>
-                    <div class="temperature">
-                      <span class="value"></span><span class="scale">°F</span>
-                    </div>
-                  </div>
-                  <div class="description">
-                    <div class="humidity"></div>
-                    <div class="wind">
-                      <span class="value"></span>
-                      <span class="scale">mph</span>
-                      <span class="direction"></span>°
-                    </div>
-                    <div class="sunrise"></div>
-                    <div class="sunset"></div>
-                  </div>
-                </div>
-                <div class="future">
-                  <div class="oneday">
-                    <div class="date"></div>
-                    <div class="icon"></div>
-                    <div class="temp-high">
-                      <span class="value"></span>°
-                    </div>
-                    <div class="temp-low">
-                      <span class="value"></span>°
-                    </div>
-                  </div>
-                  <div class="oneday">
-                    <div class="date"></div>
-                    <div class="icon"></div>
-                    <div class="temp-high">
-                      <span class="value"></span>°
-                    </div>
-                    <div class="temp-low">
-                      <span class="value"></span>°
-                    </div>
-                  </div>
-                  <div class="oneday">
-                    <div class="date"></div>
-                    <div class="icon"></div>
-                    <div class="temp-high">
-                      <span class="value"></span>°
-                    </div>
-                    <div class="temp-low">
-                      <span class="value"></span>°
-                    </div>
-                  </div>
-                  <div class="oneday">
-                    <div class="date"></div>
-                    <div class="icon"></div>
-                    <div class="temp-high">
-                      <span class="value"></span>°
-                    </div>
-                    <div class="temp-low">
-                      <span class="value"></span>°
-                    </div>
-                  </div>
-                  <div class="oneday">
-                    <div class="date"></div>
-                    <div class="icon"></div>
-                    <div class="temp-high">
-                      <span class="value"></span>°
-                    </div>
-                    <div class="temp-low">
-                      <span class="value"></span>°
-                    </div>
-                  </div>
-                  <div class="oneday">
-                    <div class="date"></div>
-                    <div class="icon"></div>
-                    <div class="temp-high">
-                      <span class="value"></span>°
-                    </div>
-                    <div class="temp-low">
-                      <span class="value"></span>°
-                    </div>
-                  </div>
-                  <div class="oneday">
-                    <div class="date"></div>
-                    <div class="icon"></div>
-                    <div class="temp-high">
-                      <span class="value"></span>°
-                    </div>
-                    <div class="temp-low">
-                      <span class="value"></span>°
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </main>
-            <div class="loader">
-              <svg viewBox="0 0 32 32" width="32" height="32">
-      <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
-    </svg>
-            </div>
-            <!-- Uncomment the line below when ready to test with fake data -->
-            <script src="scripts/app.js" async></script>
-
-          </div>
+        <dic>Select a Line:</dic>
+        <div style="width:100%">
+          <div><a type="button" onClick="getStops('red', '#c60c30');" class="btn btn-default" style="width:20%;background-color:#c60c30;color:white">RED LINE</a></div>
+          <div><a type="button" onClick="getStops('blue', '#00a1de');" class="btn btn-default" style="width:20%;background-color:#00a1de;color:white;">BLUE LINE</a></div>
+          <div><a type="button" onClick="getStops('pnk', '#e27ea6');" class="btn btn-default" style="width:20%;background-color:#e27ea6;color:white">PINK LINE</a></div>
+          <div><a type="button" onClick="getStops('o', '#f9461c');" class="btn btn-default" style="width:20%;background-color:#f9461c;color:white">ORANGE LINE</a></div>
+          <div><a type="button" onClick="getStops('g', '#009b3a');" class="btn btn-default" style="width:20%;background-color:#009b3a;color:white">GREEN LINE</a></div>
+          <div><a type="button" onClick="getStops('p', '#522398');" class="btn btn-default" style="width:20%;background-color:#522398;color:white">PURPLE LINE</a></div>
+          <div><a type="button" onClick="getStops('brn', '#62361b');" class="btn btn-default" style="width:20%;background-color:#62361b;color:white">BROWN LINE</a></div>
+          <div><a type="button" onClick="getStops('y', '#f9e300');" class="btn btn-default" style="width:20%;background-color:#f9e300;">YELLOW LINE</a></div>
+          <div id="recents"></div>
         </div>
-            
-          </th>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <h3 style="padding:10px;">Recent Stops</h3>
-            <div id="recents"></div>
-            
-          </td>
-        </tr>
-      </table>
       </div>
       <div id="screen2" class="screen2" hidden>
         <div id="station-nm" style="width:75%"></div>
@@ -218,23 +96,16 @@
   </script>
   
   <script>
-  
     jQuery(document).ready(function() {
-      show_main();
       $(".mdc-list-item").on("click", function() {
         $("#screen1").hide();
         $("#screen2").hide();
         $("#screen3").hide();
         var target = $(this).attr("href");
-        if(target=="#screen1"){
-          show_main()
-        }
         $(target).show();
 
       });
     });
-    
-    
 
     mdc.autoInit()
     document.getElementById('shrine-nav-icon').addEventListener('click', function(evt) {
@@ -243,13 +114,7 @@
     });
 
     function show_main() {
-      //add();
-
-      $("#recents").html('');
-      readAll();
-     // add();
       $("#screen1").show();
-      
       $("#screen2").hide();
       $("#screen3").hide();
     }
@@ -259,14 +124,13 @@
       $("#screen3").hide();
       $("#screen2").show();
       $("#screen2").html('');
-      var back_but = "<div style='width:100%;'><center><a style='width:50%;' type='button' onClick='show_main();' class='btn btn-default;' style='color:gray'>Back</a></center>";
+      var back_but = "<a type='button' onClick='show_main();' class='btn btn-default;' style='color:gray'>Back</a>";
       $("#screen2").append(back_but);
       $.get("https://pass-thru.herokuapp.com/https://data.cityofchicago.org/resource/8mj8-j3c4.json", function(response) {
         //console.log(response);
         var station_dict = {};
         $.each(response, function(i, v) {
           var direction = v.direction_id;
-          var station_cords = v.location.coordinates;
           if (v[l_line] == true &&
             (direction == "N" || direction == "W")
           ) {
@@ -278,24 +142,27 @@
             var stopId = v.stop_id;
             var mapid = v.map_id
             var station_nm = v.station_name.trim();
-            var button = "<a type='button' onClick='get_stop_info(" + mapid.trim() + ",\"" + l_line + "\",\"" + bg_color + "\",\"" + name + "\",\"" + station_cords + "\");' class='btn btn-default' style='width:100%;color:" + color + ";background-color:" + bg_color + ";'>" + name + "</a>";
+            var button = "<a type='button' onClick='get_stop_info(" + mapid.trim() + ",\"" + l_line + "\",\"" + bg_color + "\");' class='btn btn-default' style='width:100%;color:" + color + ";background-color:" + bg_color + ";'>" + name + "</a>";
+            //console.log(v.station_descriptive_name + " - " + v.blue);
+            var myA = $("#station-nm").clone();
+            myA.html(button);
             $("#screen2").append(button);
           }
         });
+        //console.log(station_dict);
+
 
       });
     };
 
-    function get_stop_info(stop_id1, prev_l, prev_color, name, station_cords) {
-      var button_clicked = "<a type='button' onClick='get_stop_info(" + stop_id1 + ",\"" + prev_l + "\",\"" + prev_color + "\",\"" + name + "\",\"" + station_cords + "\");' class='btn btn-default' style='width:100%;color:black;background-color:" + prev_color + ";'>" + name + "</a>";
-            
-      add(stop_id1,button_clicked);
-      $("#screen1").hide();
+    function get_stop_info(stop_id1, prev_l, prev_color) {
       $("#screen2").hide();
       $("#screen3").show();
       $("#screen3").html('<div id="map"></div>');
+      var trains = [];
       var trainz = {};
-      var back_but = "<div style='width:100%;'><center><a style='width:50%;' type='button' onClick='getStops(\"" + prev_l + "\",\"" + prev_color + "\");' class='btn btn-default'>Back</a><center></div><br>";
+      //var back_but = "<a type='button' onClick='show_main();' class='btn btn-default'>Back</a><br>";
+      var back_but = "<a type='button' onClick='getStops(\"" + prev_l + "\",\"" + prev_color + "\");' class='btn btn-default'>Back</a><br>";
       $("#screen3").append(back_but);
       $.get("https://pass-thru.herokuapp.com/http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=3afbf187bb934449a50468703ebaab3d&mapid=" + stop_id1 + "&outputType=JSON", function(response) {
         //console.log(response);
@@ -305,10 +172,11 @@
           var predicted_time = ariv - prdt;
 
           var myLatLng = { lat: Number(v.lat), lng: Number(v.lon) };
+          trains.push(myLatLng);
 
 
           var diffMins = Math.round(((predicted_time % 86400000) % 3600000) / 60000); // minutes
-          trainz[i] = { trainloc: myLatLng, dest: v.staNm, eta: diffMins, station_cords: station_cords};
+          trainz[i] = { trainloc: myLatLng, dest: v.staNm, eta: diffMins };
 
           var body = v.staNm + " - " + diffMins + " mins <br>";
 
@@ -327,32 +195,28 @@
 
           $("#screen3").append(html);
         });
-        initMap(trainz);
+        initMap(trains, trainz);
       });
     };
 
-
+    show_main();
   </script>
 
   <script>
-    function initMap(trainz) {
-      
-      for (var key in trainz) {
-        var cords = trainz[key].station_cords.split(",");
-        var loop_cords = {lat: Number(cords[1]), lng: Number(cords[0])};
-      }
-      //var loop_cords = {lat: 41.8786, lng: -87.6251};
+    function initMap(trains, trainz) {
+
+      //var myLatLng = {lat: 41.810318, lng: -87.63094};
 
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
-        center: loop_cords
+        center: { lat: 41.810318, lng: -87.63094 }
       });
 
       var infowindow = new google.maps.InfoWindow();
 
       var marker, i;
       i = 0;
-      //Loop over the trainz:
+      //Loop over the trains:
       for (var key in trainz) {
         // check if the property/key is defined in the object itself, not in parent
         if (trainz.hasOwnProperty(key)) {
